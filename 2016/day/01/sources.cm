@@ -1,0 +1,13 @@
+Library
+	signature TAXI1
+	signature TAXI2
+	structure Taxi1
+	structure Taxi2
+is
+	taxi1.sig
+	taxi2.sig
+	taxi1.sml
+	taxi2.sml
+
+	$/basis.cm
+	$/smlnj-lib.cm
