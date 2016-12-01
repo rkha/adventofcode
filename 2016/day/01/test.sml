@@ -5,8 +5,9 @@ val tests1 = [
 	("input3c", 15)
 ];
 
-val test2 = [
+val tests2 = [
 	("input4", 4)
 ];
 
 List.map (fn (x,y) => (Taxi1.solve x) = y) tests1;
+List.map (fn (x,y) => (Taxi2.solve x) = y) tests2;

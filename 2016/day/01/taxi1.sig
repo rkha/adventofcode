@@ -1,4 +1,4 @@
-signature TAXI =
+signature TAXI1 =
 sig
 	type taxidir
 	type orientation

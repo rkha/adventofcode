@@ -1,9 +1,11 @@
 Library
-	signature TAXI
+	signature TAXI1
+	signature TAXI2
 	structure Taxi1
 	structure Taxi2
 is
-	taxi.sig
+	taxi1.sig
+	taxi2.sig
 	taxi1.sml
 	taxi2.sml
 
