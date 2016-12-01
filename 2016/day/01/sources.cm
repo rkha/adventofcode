@@ -1,0 +1,6 @@
+Library
+	signature TAXI
+	structure Taxi
+is
+	$/basis.cm
+	$/smlnj-lib.cm
