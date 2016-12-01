@@ -1,9 +1,11 @@
 Library
 	signature TAXI
-	structure Taxi
+	structure Taxi1
+	structure Taxi2
 is
 	taxi.sig
-	taxi.sml
+	taxi1.sml
+	taxi2.sml
 
 	$/basis.cm
 	$/smlnj-lib.cm
