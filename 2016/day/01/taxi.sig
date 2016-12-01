@@ -4,10 +4,14 @@ sig
 	type orientation
 	type taximove
 
-	val parse : string -> taximove list
+	exception Taxi
 
 	val rotate : orientation * taxidir -> orientation
 
-	val taxiMove : (int * int) * orientation * taximove -> ((int * int) * orientation)
-	val taxiSolve : (int * int) * orientation * taximove list -> (int * int)
+	val taxiMove : ((int * int) * orientation * taximove) -> ((int * int) * orientation)
+	val taxiSolve : ((int * int) * orientation * taximove list) -> (int * int)
+
+	val parseMove : char list -> taximove
+	val parse : string -> taximove list
+	val solve : string -> (int * int)
 end;

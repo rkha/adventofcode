@@ -4,11 +4,7 @@ struct
 	datatype orientation = NORTH | EAST | SOUTH | WEST;
 	type taximove = {dir : taxidir, blocks : int};
 
-	(* val parse : string -> taximove list *)
-	fun parse filename =
-	let
-	in
-	end;
+	exception Taxi;
 
 	(* val rotate : orientation * taxidir -> orientation *)
 	fun rotate (NORTH, RIGHT) = EAST
@@ -23,21 +19,41 @@ struct
 	(* val taxiMove : (int * int) * taximove -> (int * int) *)
 	fun taxiMoveHelper ((posX, posY), NORTH, blocks) = ((posX, posY + blocks), NORTH)
 	|   taxiMoveHelper ((posX, posY), EAST, blocks) = ((posX + blocks, posY), EAST)
-	|   taxiMoveHelper ((posX, posY), SOUTH, blocks) = ((posX, posY - block), SOUTH)
+	|   taxiMoveHelper ((posX, posY), SOUTH, blocks) = ((posX, posY - blocks), SOUTH)
 	|   taxiMoveHelper ((posX, posY), WEST, blocks) = ((posX - blocks, posY), WEST);
 	fun taxiMove (pos, ori, {dir=nextDir, blocks=nextBlocks}) =
 	let
 		val newOri = rotate(ori, nextDir)
 	in
-		taxiMoveHelper (pos, newOri, nextBlocks);
+		taxiMoveHelper (pos, newOri, nextBlocks)
 	end;
 
-	(* val taxiSolve : (int * int) * taximove list -> (int * int) *)
+	(* val taxiSolve : (int * int) * orientation * taximove list -> (int * int) *)
 	fun taxiSolve (pos, ori, moves) =
 	let
-		fun taxiSolveHelper (move, (pos, ori)) = taxiMove (pos, ori, move)
-		val (pos, ori) = List.foldr taxiSolveHelper pos moves
+		fun taxiSolveHelper (move, (pos', ori')) = taxiMove (pos', ori', move)
+		val (finalPos, finalOri) = List.foldr taxiSolveHelper (pos, ori) moves
 	in
-		pos
+		finalPos
 	end;
+
+	(* val parse : string -> taximove list *)
+	fun parseMove ((#"R") :: L) =
+		{dir=RIGHT, blocks=valOf (Int.fromString (String.implode L))}
+	|   parseMove ((#"L") :: L) =
+		{dir=LEFT, blocks=valOf (Int.fromString (String.implode L))}
+	|   parseMove _ = raise Taxi;
+
+	fun parse filename =
+	let
+		val ins = TextIO.openIn filename
+		val moveString = valOf (TextIO.inputLine ins)
+		fun parseCSV c = (Char.isSpace c) orelse (c = #",")
+		val moveTokens = String.tokens parseCSV moveString
+		val moveList = List.map (parseMove o String.explode) moveTokens
+	in
+		moveList
+	end;
+
+	fun solve filename = taxiSolve ((0,0), NORTH, parse filename);
 end
