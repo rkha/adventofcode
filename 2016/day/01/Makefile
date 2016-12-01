@@ -1,4 +1,4 @@
-all: sources.cm taxi.sig taxi.sml
+all: sources.cm taxi.sig taxi1.sml taxi2.sml
 	echo 'CM.make "sources.cm";' | sml
 
 solve:

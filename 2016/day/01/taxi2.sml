@@ -1,4 +1,4 @@
-structure Taxi :> TAXI =
+structure Taxi2 :> TAXI =
 struct
 	datatype taxidir = RIGHT | LEFT;
 	datatype orientation = NORTH | EAST | SOUTH | WEST;

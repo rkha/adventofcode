@@ -6,6 +6,8 @@ struct
 
 	exception Taxi;
 
+	val debug = false;
+
 	(* val rotate : orientation * taxidir -> orientation *)
 	fun rotate (NORTH, RIGHT) = EAST
 	|   rotate (EAST, RIGHT) = SOUTH
@@ -59,7 +61,7 @@ struct
 	let
 		val (posX, posY) = taxiSolve ((0,0), NORTH, parse filename)
 	in
-		(print ("(" ^ (Int.toString posX) ^ "," ^ (Int.toString posY) ^ ")\n");
+		(if (debug) then (print ("(" ^ (Int.toString posX) ^ "," ^ (Int.toString posY) ^ ")\n")) else ();
 		(Int.abs posX) + (Int.abs posY)
 		)
 	end;

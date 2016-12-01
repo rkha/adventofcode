@@ -9,4 +9,4 @@ val test2 = [
 	("input4", 4)
 ];
 
-List.map (fn (x,y) => (Taxi1.solve x) = y) tests;
+List.map (fn (x,y) => (Taxi1.solve x) = y) tests1;
