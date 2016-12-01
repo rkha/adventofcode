@@ -13,5 +13,5 @@ sig
 
 	val parseMove : char list -> taximove
 	val parse : string -> taximove list
-	val solve : string -> (int * int)
+	val solve : string -> int
 end;

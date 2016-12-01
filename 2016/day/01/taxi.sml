@@ -32,7 +32,7 @@ struct
 	fun taxiSolve (pos, ori, moves) =
 	let
 		fun taxiSolveHelper (move, (pos', ori')) = taxiMove (pos', ori', move)
-		val (finalPos, finalOri) = List.foldr taxiSolveHelper (pos, ori) moves
+		val (finalPos, finalOri) = List.foldl taxiSolveHelper (pos, ori) moves
 	in
 		finalPos
 	end;
@@ -55,5 +55,12 @@ struct
 		moveList
 	end;
 
-	fun solve filename = taxiSolve ((0,0), NORTH, parse filename);
+	fun solve filename =
+	let
+		val (posX, posY) = taxiSolve ((0,0), NORTH, parse filename)
+	in
+		(print ("(" ^ (Int.toString posX) ^ "," ^ (Int.toString posY) ^ ")\n");
+		(Int.abs posX) + (Int.abs posY)
+		)
+	end;
 end
