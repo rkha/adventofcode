@@ -5,4 +5,4 @@ solve:
 	echo 'CM.make "sources.cm"; Taxi.solve "input";' | sml
 
 test:
-	echo 'CM.make "sources.cm"; (Taxi.solve "input1") = 5; (Taxi.solve "input2") = 2; (Taxi.solve "input3") = 12; (Taxi.solve "input3c") = 15;' | sml
+	echo 'CM.make "sources.cm"; use "test.sml";' | sml
