@@ -8,6 +8,6 @@ sig
 
 	val rotate : orientation * taxidir -> orientation
 
-	val taxiMove : (int * int) * taximove -> (int * int)
-	val taxiSolve : (int * int) * taximove list -> (int * int)
+	val taxiMove : (int * int) * orientation * taximove -> ((int * int) * orientation)
+	val taxiSolve : (int * int) * orientation * taximove list -> (int * int)
 end;
