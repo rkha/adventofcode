@@ -4,7 +4,7 @@ struct
 
 	exception Keypad of char;
 
-	val debug = true;
+	val debug = false;
 	val rowLength = 5;
 
 	fun debugPrint s = if (debug) then (print s) else ();
