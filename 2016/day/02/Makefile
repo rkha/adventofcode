@@ -11,4 +11,4 @@ solve2: sources.cm
 	echo 'CM.make "sources.cm"; val sol01_2 = Taxi2.solve "input"' | sml
 
 test: sources.cm test.sml
-	echo 'CM.make "sources.cm"; use "test.sml";' | sml
+	echo 'CM.make "sources.cm"; use "tests/test.sml";' | sml
