@@ -1,13 +1,11 @@
+val testdir = "tests/";
 val tests1 = [
-	("input1", 5),
-	("input2", 2),
-	("input3", 12),
-	("input3c", 15)
+	("input1", 1985)
 ];
 
 val tests2 = [
-	("input4", 4)
+	("input1", "5DB3")
 ];
 
-List.map (fn (x,y) => (???.solve x) = y) tests1;
-List.map (fn (x,y) => (???.solve x) = y) tests2;
+List.map (fn (x,y) => (Keypad1.solve (testdir ^ x)) = y) tests1;
+List.map (fn (x,y) => (Keypad2.solve (testdir ^ x)) = y) tests2;

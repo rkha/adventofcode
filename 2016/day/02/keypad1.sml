@@ -4,14 +4,14 @@ struct
 
 	exception Keypad of char;
 
-	val debug = false;
+	val debug = true;
 	val rowLength = 3;
 
 	fun getCode (posX, posY) = (rowLength*posY) + (posX+1);
 	fun getPos code =
 	let
-		val rows = Int.div(code, rowLength)
-		val cols = code - (rowLength * rows)
+		val rows = Int.div(code-1, rowLength)
+		val cols = code - (rowLength * rows) - 1
 	in
 		(cols, rows)
 	end;
@@ -58,7 +58,7 @@ struct
 		val codeList = List.rev revCodeList
 		val code = List.foldl (fn (x,z) => (z*10) + x) 0 codeList
 	in
-		(if (debug) then (print ("(" ^ ")\n")) else ();
+		(if (debug) then (print ("(" ^ (Int.toString code) ^ ")\n")) else ();
 		code
 	)
 	end;
