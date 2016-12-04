@@ -18,6 +18,7 @@ struct
 	let
 		val ins = TextIO.openIn filename
 		val moveStrings = getAllLines ([], ins)
+		val _ = debugPrint ("Parsed " ^ (Int.toString (List.length moveStrings)) ^ " lines of input.\n")
 		val moveList = List.map (parseLine o String.explode) moveStrings
 	in
 		moveList
