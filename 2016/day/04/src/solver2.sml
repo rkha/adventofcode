@@ -51,7 +51,7 @@ struct
 		(* In hindsight, all this crap below could've been avoided if I
 		 * read the instructions properly and broke ties with Char.< so
 		 * I could just look at the top five of
-		 * ListMergeSort (fn ((a, count1),(b, count2)) => (count1 < count2) andalso (Char.<(a, b))) charCounts
+		 * ListMergeSort (fn ((a, count1),(b, count2)) => (count1 < count2) orelse ((count1 = count) andalso (Char.>(a, b)))) charCounts
 		 * Reading the instructions is IMPORTANT
 		 * I hate myself...
 		 *)
@@ -75,6 +75,7 @@ struct
 		else
 			Char.chr (cOrd + n')
 	end;
+	(* Note to self: There's already a String.map I could've used. *)
 	fun shiftString s n = String.implode (List.map (shiftChar n) (String.explode s));
 
 	fun splitChecksumID s =
@@ -116,6 +117,7 @@ struct
 		val _ = List.app (fn (names, _, _) => List.app debugPrint names) realNames
 		val _ = List.app (fn (names, ID, checksum) => (List.app debugPrintln names; debugPrintln ((Int.toString ID) ^ "\n"))) decryptedNames
 		val idSum = List.foldl (Int.+) 0 (List.map (fn (_, id, _) => id) realNames)
+		(* Probably could've used something like filtering names with (String.prefix "north") instead of using debug print output *)
 	in
 		(debugPrint ("(Number of real lines: " ^ (Int.toString (List.length realNames)) ^ ")\n");
 		idSum
