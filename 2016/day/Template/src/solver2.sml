@@ -6,6 +6,7 @@ struct
 
 	val debug = true;
 	fun debugPrint s = if (debug) then (print s) else ();
+	fun debugPrintln s = if (debug) then (debugPrint (s ^ "\n")) else ();
 
 	fun parseLine L = raise Solver;
 
