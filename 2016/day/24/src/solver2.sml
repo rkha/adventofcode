@@ -181,13 +181,13 @@ struct
 		(* Generate all permutations of solution paths. Note, all paths have to start at node 0 *)
 		val _ = debugPrintln ("Summing all path combinations.")
 		(* We Euclidean now *)
-		val allRightPaths = List.map (fn L => (0 :: L) @ [0]) (getAllCombinations (seq 1 maxWire))
+		val allPaths = List.map (fn L => (0 :: L) @ [0]) (getAllCombinations (seq 1 maxWire))
 		val _ = debugPrintln ("Done generating all path combinations.")
-		val _ = List.app (fn L => debugPrintln ("Generated combination: " ^ (printIntList L))) allRightPaths
+		val _ = List.app (fn L => debugPrintln ("Generated combination: " ^ (printIntList L))) allPaths
 		(* Find the shortest *)
 		val _ = debugPrintln ("Finding the shortest path.")
 		(* val (shortestPath, pathList) = List.foldl (fn (currentP,(accShort,accP)) => if ((sumCombination finalGraph currentP) < accShort) then (sumCombination finalGraph currentP, currentP) else (accShort,accP)) (999999, []) allPaths *)
-		val (shortestLength, shortestPath) = findShortest (999999,[]) finalGraph allRightPaths
+		val (shortestLength, shortestPath) = findShortest (999999,[]) finalGraph allPaths
 		val _ = debugPrintln ("Shortest path length is: " ^ (Int.toString shortestLength) ^ " and the path is: " ^ (printIntList shortestPath))
 		(* val moveCount = solveMaze favNumber target *)
 	in

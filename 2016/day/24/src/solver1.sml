@@ -186,7 +186,7 @@ struct
 		(* Find the shortest *)
 		val _ = debugPrintln ("Finding the shortest path.")
 		(* val (shortestPath, pathList) = List.foldl (fn (currentP,(accShort,accP)) => if ((sumCombination finalGraph currentP) < accShort) then (sumCombination finalGraph currentP, currentP) else (accShort,accP)) (999999, []) allPaths *)
-		val (shortestLength, shortestPath) = findShortest (999999,[]) finalGraph allRightPaths
+		val (shortestLength, shortestPath) = findShortest (999999,[]) finalGraph allPaths
 		val _ = debugPrintln ("Shortest path length is: " ^ (Int.toString shortestLength) ^ " and the path is: " ^ (printIntList shortestPath))
 		(* val moveCount = solveMaze favNumber target *)
 	in
