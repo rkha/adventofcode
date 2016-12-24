@@ -135,15 +135,6 @@ struct
 	|   printIntListHelper (x :: L) = (Int.toString x) ^ "," ^ (printIntListHelper L);
 	fun printIntList L = "[" ^ (printIntListHelper L) ^ "]";
 
-	fun findLeftPath (G,rightPath) =
-	let
-		val rightEnd = List.last rightPath
-		val allLeftPaths = List.map (fn L => rightEnd :: L) (getAllCombinations (seq 5 7))
-		val (shortestLength, shortestPath) = List.foldl (fn (nextPath,(accLength,accPath)) => if ((sumCombination G nextPath) < accLength) then (sumCombination G nextPath, nextPath) else (accLength,accPath)) (999999,[]) (allLeftPaths)
-	in
-		rightPath @ (List.drop(shortestPath,1))
-	end;
-
 	fun findShortest acc G [] = acc
 	|   findShortest (accLength, accPath) G (nextPath :: paths) =
 	let
@@ -189,13 +180,14 @@ struct
 		val finalGraph = List.map (fn (index1,index2) => {startNode=index1,endNode=index2,distance=solveMaze ductGrid (List.nth(wireCoords, index1)) (List.nth(wireCoords, index2))}) edgeList
 		(* Generate all permutations of solution paths. Note, all paths have to start at node 0 *)
 		val _ = debugPrintln ("Summing all path combinations.")
-		val allRightPaths = List.map (fn L => (0 :: L) @ [0]) (getAllCombinations (seq 1 maxWire))
+		(* We Euclidean now *)
+		val allPaths = List.map (fn L => (0 :: L) @ [0]) (getAllCombinations (seq 1 maxWire))
 		val _ = debugPrintln ("Done generating all path combinations.")
-		val _ = List.app (fn L => debugPrintln ("Generated combination: " ^ (printIntList L))) allRightPaths
+		val _ = List.app (fn L => debugPrintln ("Generated combination: " ^ (printIntList L))) allPaths
 		(* Find the shortest *)
 		val _ = debugPrintln ("Finding the shortest path.")
 		(* val (shortestPath, pathList) = List.foldl (fn (currentP,(accShort,accP)) => if ((sumCombination finalGraph currentP) < accShort) then (sumCombination finalGraph currentP, currentP) else (accShort,accP)) (999999, []) allPaths *)
-		val (shortestLength, shortestPath) = findShortest (999999,[]) finalGraph allRightPaths
+		val (shortestLength, shortestPath) = findShortest (999999,[]) finalGraph allPaths
 		val _ = debugPrintln ("Shortest path length is: " ^ (Int.toString shortestLength) ^ " and the path is: " ^ (printIntList shortestPath))
 		(* val moveCount = solveMaze favNumber target *)
 	in
