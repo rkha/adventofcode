@@ -135,15 +135,6 @@ struct
 	|   printIntListHelper (x :: L) = (Int.toString x) ^ "," ^ (printIntListHelper L);
 	fun printIntList L = "[" ^ (printIntListHelper L) ^ "]";
 
-	fun findLeftPath (G,rightPath) =
-	let
-		val rightEnd = List.last rightPath
-		val allLeftPaths = List.map (fn L => rightEnd :: L) (getAllCombinations (seq 5 7))
-		val (shortestLength, shortestPath) = List.foldl (fn (nextPath,(accLength,accPath)) => if ((sumCombination G nextPath) < accLength) then (sumCombination G nextPath, nextPath) else (accLength,accPath)) (999999,[]) (allLeftPaths)
-	in
-		rightPath @ (List.drop(shortestPath,1))
-	end;
-
 	fun findShortest acc G [] = acc
 	|   findShortest (accLength, accPath) G (nextPath :: paths) =
 	let
@@ -189,6 +180,7 @@ struct
 		val finalGraph = List.map (fn (index1,index2) => {startNode=index1,endNode=index2,distance=solveMaze ductGrid (List.nth(wireCoords, index1)) (List.nth(wireCoords, index2))}) edgeList
 		(* Generate all permutations of solution paths. Note, all paths have to start at node 0 *)
 		val _ = debugPrintln ("Summing all path combinations.")
+		(* We Euclidean now *)
 		val allRightPaths = List.map (fn L => (0 :: L) @ [0]) (getAllCombinations (seq 1 maxWire))
 		val _ = debugPrintln ("Done generating all path combinations.")
 		val _ = List.app (fn L => debugPrintln ("Generated combination: " ^ (printIntList L))) allRightPaths
